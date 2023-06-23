@@ -1,12 +1,18 @@
 import 'dart:async';
+import 'dart:html';
 
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:images_test/src/api/ApiService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:images_test/src/ImageModel.dart';
 import 'package:images_test/src/component/ImageWidget.dart';
 import 'package:images_test/src/component/UpdateStreamEvent.dart';
+import 'package:images_test/src/redux/model_action.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import '../redux/app_action.dart';
+import '../redux/app_state.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -17,98 +23,74 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   TextEditingController textController = TextEditingController();
-  ApiService apiService = ApiService();
-  List<Widget> images = [];
-  int currentPage = 1;
   bool isSearched = false;
-  String searchText = "";
   final PagingController<int, ImageModel> _pagingController =
       PagingController(firstPageKey: 0);
 
   @override
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
-      getImages(UpdateStreamEvent(
-          tag: searchText, page: currentPage, isRefresh: false));
+      var store = StoreProvider.of<AppState>(context);
+      store.dispatch(fetchImages);
+      _pagingController.appendPage(store.state.images, store.state.page);
     });
     super.initState();
   }
 
-  void _setFirstSearch(UpdateStreamEvent event) {
-    setState(() {
-      isSearched = true;
-      searchText = event.tag;
-    });
-    _pagingController.refresh();
-    getImages(event);
-  }
-
-  Future getImages(UpdateStreamEvent event) async {
-    try {
-      final newItems = await apiService.getPhotoByTag(event.tag, currentPage);
-      final isLastPage = currentPage < ApiService.MAX_PER_PAGE;
-      if (isLastPage) {
-        _pagingController.appendLastPage(newItems.items.toList());
-      } else {
-        currentPage += 1;
-        final nextPageKey = currentPage;
-        _pagingController.appendPage(newItems.items.toList(), nextPageKey);
-      }
-    } catch (error) {
-      _pagingController.error = error;
-    }
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Form(
-          child: ListView(
-            shrinkWrap: true,
+    return StoreConnector<AppState, AppState>(
+        converter: (store) => store.state,
+        builder: (context, state) {
+          return ListView(
             children: [
-              Padding(
-                child: TextFormField(
-                  controller: textController,
-                  // controller: emailController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      labelText: "Поиск",
-                      hintText: "Введите интересующий вас запрос"),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Введите запрос';
-                    }
-                    return null;
-                  },
+              Form(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 12),
+                      child: TextFormField(
+                        controller: textController,
+                        // controller: emailController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                            labelText: "Поиск",
+                            hintText: "Введите интересующий вас запрос"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Введите запрос';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            child: Text("Найти фотографии"),
+                            onPressed: () {
+                              var store = StoreProvider.of<AppState>(context);
+                              store.dispatch(FetchImagesAction(
+                                  [], 1, textController.text));
+                              store.dispatch(fetchImages);
+                              isSearched = true;
+                            },
+                            style: ElevatedButton.styleFrom(),
+                          )),
+                    ),
+                  ],
                 ),
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 12),
               ),
-              Padding(
-                child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      child: Text("Найти фотографии"),
-                      onPressed: () {
-                        _setFirstSearch(UpdateStreamEvent(
-                            tag: textController.text,
-                            page: 1,
-                            isRefresh: true));
-                      },
-                      style: ElevatedButton.styleFrom(),
-                    )),
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              ),
+              isSearched ? build_two(context, state) : const Text(""),
             ],
-          ),
-        ),
-        isSearched ? buildTweets(context, searchText, true) : const Text(""),
-      ],
-    );
+          );
+        });
   }
 
-  Widget buildTweets(BuildContext context, String text, bool refresh) {
+  Widget buildTweets(BuildContext context) {
     return PagedListView<int, ImageModel>(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -120,6 +102,26 @@ class _SearchState extends State<Search> {
         ),
       ),
     );
+  }
+
+  Widget build_two(BuildContext context, AppState state) {
+    return new ListView.builder(
+        shrinkWrap: true,
+        physics: ScrollPhysics(),
+        itemCount: state.images.length,
+        itemBuilder: (context, i) {
+          print(i);
+          if (state.images.length - 2 == i) {
+            var store = StoreProvider.of<AppState>(context);
+            store.dispatch(fetchImages);
+          }
+          return Padding(
+            padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+            child: ImageWidget(
+              imageModel: state.images[i],
+            ),
+          );
+        });
   }
 
   @override

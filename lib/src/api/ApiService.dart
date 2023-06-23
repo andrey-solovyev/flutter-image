@@ -9,7 +9,8 @@ class ApiService {
   final String serverUrl = "https://api.flickr.com";
   final String apiVersion = "/v1";
   static const int MAX_PER_PAGE = 10;
-  Future<SearchResponseModel> getPhotoByTag(String tag, int page) async {
+
+  static Future<SearchResponseModel> getPhotoByTag(String tag, int page) async {
     try {
       Uri uri = Uri.https(
           "api.flickr.com", "services/feeds/photos_public.gne", {
@@ -25,7 +26,9 @@ class ApiService {
         return SearchResponseModel.fromJson(json.decode(response.body));
       }
     } catch (e) {
-      print(e);
+      print(tag + "  ${page}");
+      print("Oh, he did again");
+      print(e.toString());
     }
     return SearchResponseModel(
         title: "Me", link: "", description: "", generator: "", items: Set());
