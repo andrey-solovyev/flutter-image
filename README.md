@@ -6,4 +6,4 @@
 
 О приложении 
 
-[Рассказ о приложении.mkv](video%2F%D0%E0%F1%F1%EA%E0%E7%20%EE%20%EF%F0%E8%EB%EE%E6%E5%ED%E8%E8.mkv)
+[Рассказ о приложении.mkv](video%2Fpresentation.mkv)
