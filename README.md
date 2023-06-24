@@ -1,16 +1,9 @@
 # images_test
 
-A new Flutter project.
+Приложение Flutter разработанное в рамках предмета Мобильная разработка
 
-## Getting Started
+## О приложении
 
-This project is a starting point for a Flutter application.
+О приложении 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Рассказ о приложении.mkv](video%2F%D0%E0%F1%F1%EA%E0%E7%20%EE%20%EF%F0%E8%EB%EE%E6%E5%ED%E8%E8.mkv)
