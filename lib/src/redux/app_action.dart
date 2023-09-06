@@ -44,7 +44,7 @@ AppState _likeImage(AppState store, LikeImageAction action) {
     var indexOfSelectedImage = store.images.indexOf(firstWhere);
     List<ImageModel> copyImages = List.from(store.images);
     var imageLikes = copyImages[indexOfSelectedImage];
-    imageLikes.isLiked = true;
+    imageLikes.isLiked = !imageLikes.isLiked;
     imageLikes.isDisliked=false;
     copyImages.setAll(indexOfSelectedImage, [imageLikes]);
     return AppState(copyImages, store.page, store.tags);
@@ -62,7 +62,7 @@ AppState _dislikeImage(AppState store, DislikeImageAction action) {
     List<ImageModel> copyImages = List.from(store.images);
     var imageLikes = copyImages[indexOfSelectedImage];
     imageLikes.isLiked = false;
-    imageLikes.isDisliked = true;
+    imageLikes.isDisliked = !imageLikes.isDisliked;
     copyImages.setAll(indexOfSelectedImage, [imageLikes]);
     return AppState(copyImages, store.page, store.tags);
   } catch (e) {
