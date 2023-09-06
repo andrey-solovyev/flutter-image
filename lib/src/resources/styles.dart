@@ -16,6 +16,9 @@ class UIStyles {
     fontSize: 12,
   );
 
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   static ButtonStyle textButtonStyle(bool value) => TextButton.styleFrom(
         backgroundColor:
             value ? UIColors.pressedButton : UIColors.notPressedButton,

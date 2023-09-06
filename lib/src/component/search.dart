@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:images_test/src/component/image_list.dart';
 import 'package:images_test/src/component/search_widget.dart';
+import 'package:images_test/src/redux/app_action.dart';
 
 import '../redux/app_state.dart';
 import '../redux/model_action.dart';
@@ -22,8 +23,7 @@ class _SearchState extends State<Search> {
         builder: (context, state) {
           var store = StoreProvider.of<AppState>(context);
           if (state.images.isEmpty) {
-            print("state images ${state.images.length}");
-            store.dispatch(FetchImagesAction([], 1, ""));
+            store.dispatch(fetchImages);
           }
           return ListView(
             shrinkWrap: true,

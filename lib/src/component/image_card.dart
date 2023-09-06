@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:images_test/src/ImageModel.dart';
 import 'package:images_test/src/component/full_screen_widget.dart';
+import 'package:images_test/src/resources/colors.dart';
 import 'package:images_test/src/resources/styles.dart';
 import 'package:images_test/src/resources/text.dart';
 
@@ -20,6 +21,8 @@ class ImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var store = StoreProvider.of<AppState>(context);
     return Card(
+        color: UIColors.backgroundImagine,
+        semanticContainer: true,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -41,13 +44,20 @@ class ImageCard extends StatelessWidget {
                     NetworkImage(imageModel.media.m.replaceFirst("_m.", "_b.")),
                 height: 260,
                 fit: BoxFit.cover,
+                padding: const EdgeInsets.all(20),
                 child: InkWell(
+                  customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
                                 FullScreenImageWidget(imageModel: imageModel)));
+                  },
+                  onDoubleTap: () {
+                    store.dispatch(LikeImageAction(imageModel));
                   },
                 ),
               )

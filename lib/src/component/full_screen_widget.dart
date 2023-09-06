@@ -13,22 +13,18 @@ class FullScreenImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FullScreenWidget(
       disposeLevel: DisposeLevel.High,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Image.network(
-          imageModel.media.m.replaceFirst("_m.", "_b."),
-          fit: BoxFit.cover,
+      child: Center(
+        child: Hero(
+          tag: imageModel.tags,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.network(
+              imageModel.media.m.replaceFirst("_m.", "_b."),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
     );
-    // return Scaffold(
-    //   body: Image.network(
-    //     imageModel.media.m.replaceFirst("_m.", "_b."),
-    //     fit: BoxFit.cover,
-    //     height: double.infinity,
-    //     width: double.infinity,
-    //     alignment: Alignment.center,
-    //   ),
-    // );
   }
 }

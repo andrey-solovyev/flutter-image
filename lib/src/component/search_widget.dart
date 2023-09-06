@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:images_test/src/resources/colors.dart';
 import 'package:images_test/src/resources/text.dart';
 
 import '../redux/app_action.dart';
@@ -45,7 +46,12 @@ class SearchWidget extends StatelessWidget {
                           [], 1, textController.text));
                       store.dispatch(fetchImages);
                     },
-                    style: ElevatedButton.styleFrom(),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: UIColors.appBarBackground,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      )
+                    ),
                     child: const Text(UIText.searchText),
                   )),
             ),
