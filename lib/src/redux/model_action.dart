@@ -1,4 +1,4 @@
-import '../ImageModel.dart';
+import '../model/image_model.dart';
 
 class FetchImagesAction {
   final List<ImageModel> _images;

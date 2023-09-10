@@ -7,4 +7,5 @@
 О приложении 
 Резервная ссылка
 https://disk.yandex.ru/i/0P9LgOhrXKHc9g
-[Рассказ о приложении.mkv](video%2Fpresentation.mkv)
+[Презентация работы приложения mp4](source%2Fvideo_presentation.mp4)
+[APK](source%2Fapp-release.apk)

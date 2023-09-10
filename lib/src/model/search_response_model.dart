@@ -1,4 +1,4 @@
-import 'package:images_test/src/ImageModel.dart';
+import 'package:images_test/src/model/image_model.dart';
 
 class SearchResponseModel {
   late String title;

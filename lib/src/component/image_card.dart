@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:images_test/src/ImageModel.dart';
+import 'package:images_test/src/model/image_model.dart';
 import 'package:images_test/src/component/full_screen_widget.dart';
 import 'package:images_test/src/resources/colors.dart';
 import 'package:images_test/src/resources/styles.dart';

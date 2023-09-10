@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
-import 'package:images_test/src/ImageModel.dart';
+import 'package:images_test/src/model/image_model.dart';
 
 class FullScreenImageWidget extends StatelessWidget {
   final ImageModel imageModel;

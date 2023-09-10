@@ -1,7 +1,7 @@
 import 'package:images_test/src/api/api_service.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
-import '../ImageModel.dart';
+import '../model/image_model.dart';
 import 'app_state.dart';
 import 'model_action.dart';
 import 'dart:developer';
