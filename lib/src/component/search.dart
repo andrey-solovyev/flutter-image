@@ -6,7 +6,6 @@ import 'package:images_test/src/component/search_widget.dart';
 import 'package:images_test/src/redux/app_action.dart';
 
 import '../redux/app_state.dart';
-import '../redux/model_action.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);

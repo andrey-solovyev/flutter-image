@@ -8,6 +8,7 @@ import 'package:images_test/src/resources/text.dart';
 
 import '../redux/app_state.dart';
 import '../redux/model_action.dart';
+import '../resources/dimens.dart';
 
 class ImageCard extends StatelessWidget {
   final ImageModel imageModel;
@@ -25,13 +26,13 @@ class ImageCard extends StatelessWidget {
         semanticContainer: true,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: UIDimentions.borderRadiusDefault,
         ),
         child: Column(children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.all(10).copyWith(bottom: 3),
+              padding: UIDimentions.defaultPadding.copyWith(bottom: 3),
               child: Text(
                 textAlign: TextAlign.left,
                 'Author: ${imageModel.author}',
@@ -45,12 +46,12 @@ class ImageCard extends StatelessWidget {
               Ink.image(
                 image:
                     NetworkImage(imageModel.media.m.replaceFirst("_m.", "_b.")),
-                height: 260,
+                height: UIDimentions.smallImageHeight,
                 fit: BoxFit.cover,
-                padding: const EdgeInsets.all(20),
+                padding: UIDimentions.defaultPadding,
                 child: InkWell(
                   customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius: UIDimentions.borderRadiusDefault,
                   ),
                   onTap: () {
                     Navigator.push(
@@ -68,7 +69,7 @@ class ImageCard extends StatelessWidget {
           ),
           UIStyles.margins(),
           Padding(
-            padding: const EdgeInsets.all(16).copyWith(bottom: 0),
+            padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
             child: Text(
               imageModel.title,
               style: UIStyles.textDescriptionCard,

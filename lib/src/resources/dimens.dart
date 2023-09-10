@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UIDimentions {
-  static const defaultPadding = EdgeInsets.all(10);
+  static const defaultPadding = EdgeInsets.all(15);
   static const likeIconSize = 24.0;
-  static const smallImageHeight = 200.0;
-  static const fullImageHeight = 500.0;
-  static const gridPadding = SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: 350,
-      mainAxisExtent: 300,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10);
+  static const smallImageHeight = 260.0;
+  static BorderRadius borderRadiusDefault = BorderRadius.circular(25.0);
 }
