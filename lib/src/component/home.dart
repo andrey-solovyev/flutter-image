@@ -13,11 +13,10 @@ class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-
   final store = Store(reducer,
       initialState: AppState.initialState(), middleware: [thunkMiddleware]);
 
@@ -26,7 +25,7 @@ class _HomeState extends State<Home> {
     return StoreProvider(
         store: store,
         child: Scaffold(
-          backgroundColor:  UIColors.background,
+          backgroundColor: UIColors.background,
           appBar: AppBar(
             backgroundColor: UIColors.appBarBackground,
             title: const Text(

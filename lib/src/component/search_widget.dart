@@ -45,6 +45,7 @@ class SearchWidget extends StatelessWidget {
                       store.dispatch(FetchImagesAction(
                           [], 1, textController.text));
                       store.dispatch(fetchImages);
+                      FocusManager.instance.primaryFocus?.unfocus();
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: UIColors.appBarBackground,

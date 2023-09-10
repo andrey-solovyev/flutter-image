@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class UIStyles {
-  static TextStyle textTitleCard = const TextStyle(
+  static TextStyle textDescriptionCard = const TextStyle(
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: Colors.grey,
     fontSize: 24,
   );
 
-  static TextStyle textDescriptionCard = const TextStyle(
+  static TextStyle textAuthorCard = const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.black,
     fontSize: 12,

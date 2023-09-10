@@ -28,12 +28,15 @@ class ImageCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
         child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(10).copyWith(bottom: 3),
-            child: Text(
-              textAlign: TextAlign.left,
-              'Author: ${imageModel.author}',
-              style: UIStyles.textDescriptionCard,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(10).copyWith(bottom: 3),
+              child: Text(
+                textAlign: TextAlign.left,
+                'Author: ${imageModel.author}',
+                style: UIStyles.textAuthorCard,
+              ),
             ),
           ),
           Stack(
@@ -68,7 +71,7 @@ class ImageCard extends StatelessWidget {
             padding: const EdgeInsets.all(16).copyWith(bottom: 0),
             child: Text(
               imageModel.title,
-              style: UIStyles.textTitleCard,
+              style: UIStyles.textDescriptionCard,
             ),
           ),
           UIStyles.margins(),

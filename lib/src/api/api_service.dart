@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:images_test/src/model/search_response_model.dart';
 import 'package:http/http.dart' as http;
+import 'dart:developer';
 
 
 class ApiService {
@@ -18,13 +19,14 @@ class ApiService {
         'per_page': '$page'
       });
       var client = http.Client();
+      log('search image: $tag $page');
       final response =
           await client.get(uri, headers: {"Content-Type": "application/json"});
       if (response.statusCode == 200) {
         return SearchResponseModel.fromJson(json.decode(response.body));
       }
     } catch (e) {
-      print("Catch error in api $e");
+      log("Catch error in api $e");
     }
     return SearchResponseModel(
         title: "Me", link: "", description: "", generator: "", items: Set());

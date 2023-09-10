@@ -4,6 +4,7 @@ import 'package:redux_thunk/redux_thunk.dart';
 import '../ImageModel.dart';
 import 'app_state.dart';
 import 'model_action.dart';
+import 'dart:developer';
 
 AppState reducer(AppState prev, dynamic action) {
   if (action is FetchImagesAction) {
@@ -32,7 +33,7 @@ ThunkAction<AppState> fetchImages = (Store<AppState> store) async {
     store.dispatch(
         FetchImagesAction(result, store.state.page + 1, store.state.tags));
   } catch (e) {
-    print("Catch error in fetch image: $e");
+    log("Catch error in fetch image: $e");
     return;
   }
 };
@@ -49,7 +50,7 @@ AppState _likeImage(AppState store, LikeImageAction action) {
     copyImages.setAll(indexOfSelectedImage, [imageLikes]);
     return AppState(copyImages, store.page, store.tags);
   } catch (e) {
-    print("Catch error in like image: $e");
+    log("Catch error in like image: $e");
   }
   return AppState(store.images, store.page, store.tags);
 }
@@ -66,7 +67,7 @@ AppState _dislikeImage(AppState store, DislikeImageAction action) {
     copyImages.setAll(indexOfSelectedImage, [imageLikes]);
     return AppState(copyImages, store.page, store.tags);
   } catch (e) {
-    print("Catch error in dislike image: $e");
+    log("Catch error in dislike image: $e");
   }
   return AppState(store.images, store.page, store.tags);
 }
