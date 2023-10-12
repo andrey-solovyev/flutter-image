@@ -5,9 +5,13 @@
 ## О приложении
 
 О приложении 
-Резервная ссылка
-https://disk.yandex.ru/i/mQiMjEZjLp_T2g
+1. Архитектура Redux
+2. Лайк фото двойным нажатием на фото
+3. Сохранение состояния изображения
+4. Поиск изображений по тэгу
 
-[Презентация работы приложения mp4](source%2Fvideo_presentation.mp4)
+[Презентация работы приложения на смартфоне](https://disk.yandex.ru/i/mQiMjEZjLp_T2g)
+
+[Рассказ о приложении](https://disk.yandex.ru/i/3RkxY-hOftLCnQ)
 
 [APK](source%2Fapp-release.apk)
