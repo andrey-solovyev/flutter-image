@@ -72,6 +72,7 @@ class ImageCardDetails extends StatelessWidget {
                                     )));
                       },
                       onDoubleTap: () {
+                        rebuildAllChildren(context);
                         store.dispatch(LikeImageAction(imageModel));
                       },
                     ),
@@ -110,6 +111,7 @@ class ImageCardDetails extends StatelessWidget {
                     },
                     onTap: (isLiked) async {
                       store.dispatch(LikeImageAction(imageModel));
+                      rebuildAllChildren(context);
                       return imageModel.isLiked;
                     },
                   ),
@@ -125,11 +127,19 @@ class ImageCardDetails extends StatelessWidget {
                     },
                     onTap: (isLiked) async {
                       store.dispatch(DislikeImageAction(imageModel));
+                      rebuildAllChildren(context);
                       return imageModel.isDisliked;
                     },
                   ),
                 ],
               ),
             ])));
+  }
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el.markNeedsBuild();
+      el.visitChildren(rebuild);
+    }
+    (context as Element).visitChildren(rebuild);
   }
 }
