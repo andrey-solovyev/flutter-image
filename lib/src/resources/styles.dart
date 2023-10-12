@@ -10,10 +10,22 @@ class UIStyles {
     fontSize: 24,
   );
 
+  static TextStyle textDateTaken = const TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.grey,
+    fontSize: 12,
+  );
+
   static TextStyle textAuthorCard = const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.black,
     fontSize: 12,
+  );
+
+  static TextStyle textAuthorCardDetail = const TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 20,
   );
 
   static const TextStyle optionStyle =
@@ -23,6 +35,7 @@ class UIStyles {
         backgroundColor:
             value ? UIColors.pressedButton : UIColors.notPressedButton,
       );
+
 
   static SizedBox margins() => const SizedBox(height: 8);
 }

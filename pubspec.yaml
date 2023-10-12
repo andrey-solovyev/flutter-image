@@ -38,7 +38,7 @@ dependencies:
   http: ^1.0.0
   flutter_redux: ^0.10.0
   redux_thunk: ^0.4.0
-  full_screen_image: ^2.0.0
+  like_button: ^2.0.5
 
 
 dev_dependencies:

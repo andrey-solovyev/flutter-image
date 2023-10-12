@@ -9,6 +9,7 @@ import 'package:images_test/src/resources/text.dart';
 import '../redux/app_state.dart';
 import '../redux/model_action.dart';
 import '../resources/dimens.dart';
+import 'image_card_details.dart';
 
 class ImageCard extends StatelessWidget {
   final ImageModel imageModel;
@@ -57,8 +58,10 @@ class ImageCard extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                FullScreenImageWidget(imageModel: imageModel)));
+                            builder: (context) => FullScreenImageWidget(
+                                  imageModel: imageModel,
+                                  store: store,
+                                )));
                   },
                   onDoubleTap: () {
                     store.dispatch(LikeImageAction(imageModel));
@@ -92,6 +95,18 @@ class ImageCard extends StatelessWidget {
                 },
                 style: UIStyles.textButtonStyle(imageModel.isDisliked),
                 child: const Text(UIText.dislikeImage),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ImageCardDetails(
+                                imageModel: imageModel,
+                                store: store,
+                              )));
+                },
+                child: const Text(UIText.detailsTitle),
               )
             ],
           ),

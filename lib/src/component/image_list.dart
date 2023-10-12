@@ -12,20 +12,24 @@ class ImageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var store = StoreProvider.of<AppState>(context);
-    return SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: ListView.builder(
-            physics: const ScrollPhysics(),
-            itemCount: state.images.length,
-            itemBuilder: (context, i) {
-              if (state.images.length - 2 == i) {
-                store.dispatch(fetchImages);
-              }
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                child: ImageCard(imageModel: state.images[i]),
-              );
-            }));
+    return StoreConnector<AppState, AppState>(
+        converter: (store) => store.state,
+        builder: (context, state) {
+          var store = StoreProvider.of<AppState>(context);
+          return SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: ListView.builder(
+                  physics: const ScrollPhysics(),
+                  itemCount: state.images.length,
+                  itemBuilder: (context, i) {
+                    if (state.images.length - 2 == i) {
+                      store.dispatch(fetchImages);
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+                      child: ImageCard(imageModel: state.images[i]),
+                    );
+                  }));
+        });
   }
 }
