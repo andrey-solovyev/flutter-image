@@ -53,18 +53,9 @@ class FullScreenImageWidget extends StatelessWidget {
                 },
                 onTap: (isLiked) async {
                   store.dispatch(LikeImageAction(imageModel));
-                  rebuildAllChildren(context);
                   return imageModel.isLiked;
                 },
               ),
             ]));
-  }
-
-  void rebuildAllChildren(BuildContext context) {
-    void rebuild(Element el) {
-      el.markNeedsBuild();
-      el.visitChildren(rebuild);
-    }
-    (context as Element).visitChildren(rebuild);
   }
 }
