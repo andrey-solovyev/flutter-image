@@ -11,13 +11,17 @@ import '../redux/app_state.dart';
 import '../redux/model_action.dart';
 import '../resources/dimens.dart';
 
-class ImageCardDetails extends StatelessWidget {
+class ImageCardDetails extends  StatefulWidget {
   final ImageModel imageModel;
   final Store<AppState> store;
 
   const ImageCardDetails(
       {Key? key, required this.imageModel, required this.store})
       : super(key: key);
+  @override
+  State<ImageCardDetails> createState() => _ImageCardDetailsState();
+}
+class _ImageCardDetailsState extends State<ImageCardDetails> {
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,7 @@ class ImageCardDetails extends StatelessWidget {
                   padding: UIDimentions.defaultPadding.copyWith(bottom: 3),
                   child: Text(
                     textAlign: TextAlign.left,
-                    'Author: ${imageModel.author}',
+                    'Author: ${widget.imageModel.author}',
                     style: UIStyles.textAuthorCardDetail,
                   ),
                 ),
@@ -54,7 +58,7 @@ class ImageCardDetails extends StatelessWidget {
                 children: [
                   Ink.image(
                     image: NetworkImage(
-                        imageModel.media.m.replaceFirst("_m.", "_b.")),
+                        widget.imageModel.media.m.replaceFirst("_m.", "_b.")),
                     height: UIDimentions.smallImageHeight,
                     fit: BoxFit.cover,
                     padding: UIDimentions.defaultPadding,
@@ -67,13 +71,14 @@ class ImageCardDetails extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => FullScreenImageWidget(
-                                      imageModel: imageModel,
-                                      store: store,
-                                    )));
+                                      imageModel: widget.imageModel,
+                                      store: widget.store,
+                                    )),
+                        ).then((_) => setState(() {}));
                       },
                       onDoubleTap: () {
                         rebuildAllChildren(context);
-                        store.dispatch(LikeImageAction(imageModel));
+                        widget.store.dispatch(LikeImageAction(widget.imageModel));
                       },
                     ),
                   )
@@ -83,7 +88,7 @@ class ImageCardDetails extends StatelessWidget {
               Padding(
                 padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
                 child: Text(
-                  imageModel.title,
+                  widget.imageModel.title,
                   style: UIStyles.textDescriptionCard,
                 ),
               ),
@@ -91,7 +96,7 @@ class ImageCardDetails extends StatelessWidget {
               Padding(
                 padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
                 child: Text(
-                  imageModel.dateTaken,
+                  widget.imageModel.dateTaken,
                   style: UIStyles.textDateTaken,
                 ),
               ),
@@ -101,34 +106,34 @@ class ImageCardDetails extends StatelessWidget {
                 children: [
                   LikeButton(
                     size: UIDimentions.likeIconSize,
-                    isLiked: imageModel.isLiked,
+                    isLiked: widget.imageModel.isLiked,
                     likeBuilder: (isLiked) {
-                      final color = imageModel.isLiked
+                      final color = widget.imageModel.isLiked
                           ? UIColors.colorLikeIcon
                           : UIColors.colorNotLikeIcon;
                       return Icon(Icons.favorite,
                           color: color, size: UIDimentions.likeIconSize);
                     },
                     onTap: (isLiked) async {
-                      store.dispatch(LikeImageAction(imageModel));
+                      widget.store.dispatch(LikeImageAction(widget.imageModel));
                       rebuildAllChildren(context);
-                      return imageModel.isLiked;
+                      return widget.imageModel.isLiked;
                     },
                   ),
                   LikeButton(
                     size: UIDimentions.likeIconSize,
-                    isLiked: imageModel.isDisliked,
+                    isLiked: widget.imageModel.isDisliked,
                     likeBuilder: (isDisliked) {
-                      final color = imageModel.isDisliked
+                      final color =widget.imageModel.isDisliked
                           ? UIColors.colorLikeIcon
                           : UIColors.colorNotLikeIcon;
                       return Icon(Icons.thumb_down,
                           color: color, size: UIDimentions.likeIconSize);
                     },
                     onTap: (isLiked) async {
-                      store.dispatch(DislikeImageAction(imageModel));
+                      widget.store.dispatch(DislikeImageAction(widget.imageModel));
                       rebuildAllChildren(context);
-                      return imageModel.isDisliked;
+                      return widget.imageModel.isDisliked;
                     },
                   ),
                 ],
