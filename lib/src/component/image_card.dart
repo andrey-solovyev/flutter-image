@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:images_test/src/component/tap_fade_icon.dart';
 import 'package:images_test/src/model/image_model.dart';
 import 'package:images_test/src/component/full_screen_widget.dart';
 import 'package:images_test/src/resources/colors.dart';
 import 'package:images_test/src/resources/styles.dart';
 import 'package:images_test/src/resources/text.dart';
+import 'package:like_button/like_button.dart';
 
 import '../redux/app_state.dart';
 import '../redux/model_action.dart';
 import '../resources/dimens.dart';
+import 'avatars.dart';
 import 'image_card_details.dart';
 
 class ImageCard extends StatelessWidget {
@@ -29,18 +32,9 @@ class ImageCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: UIDimentions.borderRadiusDefault,
         ),
-        child: Column(children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: UIDimentions.defaultPadding.copyWith(bottom: 3),
-              child: Text(
-                textAlign: TextAlign.left,
-                'Author: ${imageModel.author}',
-                style: UIStyles.textAuthorCard,
-              ),
-            ),
-          ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
+          _ProfileSlab(userData: imageModel.author),
+          UIStyles.margins(),
           Stack(
             alignment: Alignment.center,
             children: [
@@ -71,45 +65,132 @@ class ImageCard extends StatelessWidget {
             ],
           ),
           UIStyles.margins(),
-          Padding(
+          Container(
             padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
             child: Text(
               imageModel.title,
               style: UIStyles.textDescriptionCard,
+              textAlign: TextAlign.left,
             ),
           ),
+          // Padding(
+          //   padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
+          //   child: Text(
+          //     imageModel.title,
+          //     style: UIStyles.textDescriptionCard,
+          //     textAlign: TextAlign.left,
+          //   ),
+          // ),
           UIStyles.margins(),
           ButtonBar(
             alignment: MainAxisAlignment.start,
             children: [
-              TextButton(
-                onPressed: () {
+              LikeButton(
+                size: UIDimentions.likeIconSize,
+                isLiked: imageModel.isLiked,
+                likeBuilder: (isLiked) {
+                  final color = imageModel.isLiked
+                      ? UIColors.colorLikeIcon
+                      : UIColors.colorNotLikeIcon;
+                  return Icon(Icons.favorite,
+                      color: color, size: UIDimentions.likeIconSize);
+                },
+                onTap: (isLiked) async {
                   store.dispatch(LikeImageAction(imageModel));
+                  return imageModel.isLiked;
                 },
-                style: UIStyles.textButtonStyle(imageModel.isLiked),
-                child: const Text(UIText.likeImage),
               ),
-              TextButton(
-                onPressed: () {
+              LikeButton(
+                size: UIDimentions.likeIconSize,
+                isLiked: imageModel.isDisliked,
+                likeBuilder: (isDisliked) {
+                  final color = imageModel.isDisliked
+                      ? UIColors.colorLikeIcon
+                      : UIColors.colorNotLikeIcon;
+                  return Icon(Icons.thumb_down,
+                      color: color, size: UIDimentions.likeIconSize);
+                },
+                onTap: (isLiked) async {
                   store.dispatch(DislikeImageAction(imageModel));
+                  return imageModel.isDisliked;
                 },
-                style: UIStyles.textButtonStyle(imageModel.isDisliked),
-                child: const Text(UIText.dislikeImage),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ImageCardDetails(
-                                imageModel: imageModel,
-                                store: store,
-                              )));
+              LikeButton(
+                size: UIDimentions.likeIconSize,
+                isLiked: imageModel.isDisliked,
+                likeBuilder: (isDisliked) {
+                  final color = imageModel.isDisliked
+                      ? UIColors.colorLikeIcon
+                      : UIColors.colorNotLikeIcon;
+                  return Icon(Icons.read_more,
+                      color: color, size: UIDimentions.likeIconSize);
                 },
-                child: const Text(UIText.detailsTitle),
-              )
+                onTap: (isLiked) async {
+                  store.dispatch(DislikeImageAction(imageModel));
+                  return imageModel.isDisliked;
+                },
+              ),
             ],
           ),
+          // ButtonBar(
+          //   alignment: MainAxisAlignment.start,
+          //   children: [
+          //     TextButton(
+          //       onPressed: () {
+          //         store.dispatch(LikeImageAction(imageModel));
+          //       },
+          //       style: UIStyles.textButtonStyle(imageModel.isLiked),
+          //       child: const Text(UIText.likeImage),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {
+          //         store.dispatch(DislikeImageAction(imageModel));
+          //       },
+          //       style: UIStyles.textButtonStyle(imageModel.isDisliked),
+          //       child: const Text(UIText.dislikeImage),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {
+          //         Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //                 builder: (context) => ImageCardDetails(
+          //                       imageModel: imageModel,
+          //                       store: store,
+          //                     )));
+          //       },
+          //       child: const Text(UIText.detailsTitle),
+          //     )
+          //   ],
+          // ),
         ]));
+  }
+}
+
+class _ProfileSlab extends StatelessWidget {
+  const _ProfileSlab({
+    Key? key,
+    required this.userData,
+  }) : super(key: key);
+
+  final String userData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
+      child: Row(
+        children: [
+          Avatar.small(streamagramUser: userData),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              userData,
+              style: UIStyles.textStyleBold,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

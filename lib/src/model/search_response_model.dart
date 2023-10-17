@@ -15,7 +15,7 @@ class SearchResponseModel {
       required this.items});
 
   factory SearchResponseModel.fromJson(Map<String, dynamic> json) {
-    Set<ImageModel> images = Set();
+    Set<ImageModel> images = {};
     if (json["items"] != null) {
       for (var item in json["items"]) {
         images.add(ImageModel.fromJson(item));

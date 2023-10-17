@@ -9,6 +9,7 @@ class UIColors {
   static const backgroundImagine = Color.fromARGB(255, 255, 255, 255);
   static const appBarBackground = Color.fromARGB(255, 83, 138, 107);
   static const notPressedButton = Colors.white70;
+  static const secondary = Color(0xFF52896B);
   static const colorFilter = ColorFilter.mode(
     Colors.grey,
     BlendMode.saturation,
