@@ -27,13 +27,7 @@ class _ImageCardDetailsState extends State<ImageCardDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: UIColors.background,
-        appBar: AppBar(
-          backgroundColor: UIColors.appBarBackground,
-          title: const Text(
-            UIText.applicationTitle,
-            style: UIStyles.optionStyle,
-          ),
-        ),
+        appBar: UIStyles.appbar,
         body: Card(
             color: UIColors.backgroundImagine,
             semanticContainer: true,
@@ -85,22 +79,6 @@ class _ImageCardDetailsState extends State<ImageCardDetails> {
                 ],
               ),
               UIStyles.margins(),
-              Padding(
-                padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
-                child: Text(
-                  widget.imageModel.title,
-                  style: UIStyles.textDescriptionCard,
-                ),
-              ),
-              UIStyles.margins(),
-              Padding(
-                padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
-                child: Text(
-                  widget.imageModel.dateTaken,
-                  style: UIStyles.textDateTaken,
-                ),
-              ),
-              UIStyles.margins(),
               ButtonBar(
                 alignment: MainAxisAlignment.start,
                 children: [
@@ -138,6 +116,23 @@ class _ImageCardDetailsState extends State<ImageCardDetails> {
                   ),
                 ],
               ),
+              UIStyles.margins(),
+              Padding(
+                padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
+                child: Text(
+                  widget.imageModel.title,
+                  style: UIStyles.textDescriptionCard,
+                ),
+              ),
+              UIStyles.margins(),
+              Padding(
+                padding: UIDimentions.defaultPadding.copyWith(bottom: 0),
+                child: Text(
+                  widget.imageModel.dateTaken,
+                  style: UIStyles.textDateTaken,
+                ),
+              ),
+              UIStyles.margins(),
             ])));
   }
   void rebuildAllChildren(BuildContext context) {

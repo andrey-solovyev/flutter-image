@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:images_test/src/component/post_card.dart';
 
 import '../redux/app_action.dart';
 import '../redux/app_state.dart';
@@ -27,7 +28,7 @@ class ImageList extends StatelessWidget {
                     }
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                      child: ImageCard(imageModel: state.images[i]),
+                      child: PostCard(imageModel: state.images[i]),
                     );
                   }));
         });

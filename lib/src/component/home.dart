@@ -26,13 +26,7 @@ class _HomeState extends State<Home> {
         store: store,
         child: Scaffold(
           backgroundColor: UIColors.background,
-          appBar: AppBar(
-            backgroundColor: UIColors.appBarBackground,
-            title: const Text(
-              UIText.applicationTitle,
-              style: UIStyles.optionStyle,
-            ),
-          ),
+          appBar: UIStyles.appbar,
           body: const Search(),
         ));
   }

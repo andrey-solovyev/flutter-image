@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:images_test/src/component/tap_fade_icon.dart';
 import 'package:images_test/src/model/image_model.dart';
 import 'package:images_test/src/component/full_screen_widget.dart';
 import 'package:images_test/src/resources/colors.dart';
 import 'package:images_test/src/resources/styles.dart';
-import 'package:images_test/src/resources/text.dart';
 import 'package:like_button/like_button.dart';
 
 import '../redux/app_state.dart';
 import '../redux/model_action.dart';
 import '../resources/dimens.dart';
 import 'avatars.dart';
-import 'image_card_details.dart';
 
 class ImageCard extends StatelessWidget {
   final ImageModel imageModel;
