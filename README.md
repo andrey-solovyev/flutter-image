@@ -17,4 +17,10 @@
 
 [Презентация приложения](https://disk.yandex.ru/i/mQiMjEZjLp_T2g)
 
+[Главный экран](source%2Fmain_screen.JPG)
+
+[Информация о фото](source%2Fdetails_screen.JPG)
+
+[Полный экран](source%2Ffull_screen_image.JPG)
+
 [APK](source%2Fapp-release.apk)
