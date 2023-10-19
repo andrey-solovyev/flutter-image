@@ -13,9 +13,9 @@
 3. Поиск по тэгам
 4. Лайки\Дизлайки
 
-[Презентация работы приложения на смартфоне](https://disk.yandex.ru/i/qGTxW7CkFesRCw)
+[Презентация работы приложения на смартфоне](https://disk.yandex.ru/i/VV05JdHJggtGSw)
 
-[Презентация приложения](https://disk.yandex.ru/i/mQiMjEZjLp_T2g)
+[Презентация приложения](https://disk.yandex.ru/i/LiWb1a2IdYv2hA)
 
 ![Главный экран](source%2Fmain_screen.JPG)
 
