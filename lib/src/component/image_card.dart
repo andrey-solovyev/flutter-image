@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:images_test/src/component/profile/profile_page.dart';
 import 'package:images_test/src/model/image_model.dart';
 import 'package:images_test/src/component/full_screen_widget.dart';
 import 'package:images_test/src/resources/colors.dart';
@@ -29,7 +32,7 @@ class ImageCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: UIDimentions.borderRadiusDefault,
         ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           _ProfileSlab(userData: imageModel.author),
           UIStyles.margins(),
           Stack(
@@ -174,20 +177,23 @@ class _ProfileSlab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
-      child: Row(
-        children: [
-          Avatar.small(streamagramUser: userData),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              userData,
-              style: UIStyles.textStyleBold,
+    return GestureDetector(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
+        child: Row(
+          children: [
+            Avatar.small(streamagramUser: userData),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                userData,
+                style: UIStyles.textStyleBold,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () { print("TAP TAP TAP");},
     );
   }
 }

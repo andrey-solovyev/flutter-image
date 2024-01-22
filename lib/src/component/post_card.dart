@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:images_test/src/component/profile/profile_page.dart';
 import 'package:images_test/src/resources/colors.dart';
 import 'package:images_test/src/resources/styles.dart';
 import 'package:like_button/like_button.dart';
@@ -38,46 +39,57 @@ class PostCard extends StatelessWidget {
               vertical: 4,
               horizontal: 16,
             ).copyWith(right: 0),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 16,
-                  backgroundImage: NetworkImage(
-                      imageModel.media.m.replaceFirst("_m.", "_b.")),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          imageModel.author,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        )
-                      ],
+            child: InkWell(
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 16,
+                    backgroundImage: NetworkImage(
+                        imageModel.media.m.replaceFirst("_m.", "_b.")),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            imageModel.author,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ImageCardDetails(
-                              imageModel: imageModel,
-                              store: store,
-                            )));
-                  },
-                  icon: const Icon(
-                    Icons.more_vert,
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ImageCardDetails(
+                                    imageModel: imageModel,
+                                    store: store,
+                                  )));
+                    },
+                    icon: const Icon(
+                      Icons.more_vert,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(
+                          account: imageModel.author, img: imageModel.media.m)),
+                );
+              },
             ),
           ),
           // Image Section

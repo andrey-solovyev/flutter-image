@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:images_test/src/component/profile/profile_page.dart';
 import 'package:images_test/src/component/search.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:images_test/src/resources/styles.dart';
@@ -26,7 +27,7 @@ class _HomeState extends State<Home> {
         store: store,
         child: Scaffold(
           backgroundColor: UIColors.background,
-          appBar: UIStyles.appbar,
+          appBar: UIStyles.appbar(context),
           body: const Search(),
         ));
   }

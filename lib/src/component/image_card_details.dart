@@ -27,7 +27,7 @@ class _ImageCardDetailsState extends State<ImageCardDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: UIColors.background,
-        appBar: UIStyles.appbar,
+        appBar: UIStyles.appbar(context),
         body: Card(
             color: UIColors.backgroundImagine,
             semanticContainer: true,
